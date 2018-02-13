@@ -1,11 +1,8 @@
 route:
-    receiver: 'slack'
+    receiver: 'alerta'
 
 receivers:
-    - name: 'slack'
-      slack_configs:
-          - send_resolved: true
-            text: "{{ .CommonAnnotations.description }}"
-            username: 'Prometheus'
-            channel: '#<channel-name>'
-            api_url: 'https://hooks.slack.com/services/<webhook-id>'
+- name: "alerta"
+  webhook_configs:
+  - url: 'http://alerta:9080/api/webhooks/prometheus'
+    send_resolved: true
